@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:text="${event.title}"></title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+	<h3>Event Directory</h3>
+	<hr>
+	<a th:href="@{/events/showFormForAddEvent}" class="btn btn-primary btn-sm mb-3">Add Event</a>
+	<table border="1" class="table table-bordered table-striped">
+
+		<thead class="table-dark">
+			<tr>
+				<th>Member Name</th>
+				<div th:each="eoption : ${options}" >
+					<th> <div th:text="${eoption.startTime}" />  - <div th:text="${eoption.endTime}" /></th>
+				</div>
+				
+			</tr> 
+		</thead>
+		<tbody>
+			<tr th:each="emember : ${members}">
+				<td th:text="${emember.name}" />
+				
+				<div th:each="checkVal : ${emember.getCheckedOptions(options)}">
+				
+					<td>
+					
+
+						<div th:if="${checkVal.booleanValue()}">
+						  <p>TRUE</p>
+						</div>
+						<div th:unless="${checkVal.booleanValue()}">
+						  <p>FALSE</p>
+						</div>
+
+					
+					</td>
+				
+				</div>
+					
+		</tbody>
+
+	</table>
+</div>
+</body>
+</html>
