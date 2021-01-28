@@ -1,3 +1,4 @@
-ver 0.1 
-need to change the db schema
-also need to update the entities
+ver 0.2 
+updated db schema
+also updated the entities
+need to update the page to have checklists

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,13 @@ public class EventMember {
 	
 	@Column(name = "member_name")
 	private	String name;
+	
+	@ManyToOne
+	@JoinColumn(name="event_id")
+	private Event event;
+	
+	
+	
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "member_options",
@@ -69,7 +77,7 @@ public class EventMember {
 		this.chosenOptions = chosenOptions;
 	}
 	
-	List<Boolean> getCheckedOptions(List<EventOption> allOptions){
+	public List<Boolean> getCheckedOptions(List<EventOption> allOptions){
 		
 		List<Boolean> checkedList = new ArrayList<Boolean>();
 		

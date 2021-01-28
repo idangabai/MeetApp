@@ -44,8 +44,19 @@ DROP TABLE IF EXISTS `emember`;
 CREATE TABLE `emember` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `member_name` varchar(50) NOT NULL,
+  `event_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  FOREIGN KEY (`event_id`) 
+  REFERENCES `event` (`id`) 
+  ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `emember` (member_name,event_id)
+VALUES
+('Idan', 1), 
+('Chen', 1),
+('Roi', 1);
 
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -64,40 +75,12 @@ CREATE TABLE `member_options` (
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `event_option`;
-
-CREATE TABLE `event_option` (
-  `option_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  PRIMARY KEY (`option_id`,`event_id` ),
-  FOREIGN KEY (`option_id`) 
-  REFERENCES `eoption` (`id`)
-  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (`event_id`) 
-  REFERENCES `event` (`id`) 
-  ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-INSERT INTO `event_option` (option_id, event_id)
+INSERT INTO `member_options` (member_id,option_id)
 VALUES
 (1, 1), 
-(2, 1),
-(3, 1);
-
-
-DROP TABLE IF EXISTS `event_members`;
-
-CREATE TABLE `event_members` (
-  `member_id` int(11) NOT NULL,
-  `event_id` int(11) NOT NULL,
-  PRIMARY KEY (`member_id`,`event_id` ),
-  FOREIGN KEY (`member_id`) 
-  REFERENCES `emember` (`id`)
-  ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (`event_id`) 
-  REFERENCES `event` (`id`) 
-  ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
+(1, 2),
+(1, 3),
+(2, 1), 
+(2, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -49,7 +49,7 @@ public class EventController {
 		theModel.addAttribute("members", members);
 		
 		//set the checked table
-		for(EventOption option : options) {
+		for(EventMember option : members) {
 			System.out.println(option);
 		}
 		

@@ -74,7 +74,9 @@ public class EventOption {
 		this.event = event;
 	}
 
-	
+	public String showTime() {
+		return startTime + "-" + endTime;
+	}
 	
 	
 }

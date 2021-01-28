@@ -53,18 +53,12 @@ public class Event {
 		return "Event [Id=" + id + ", title=" + title + "]";
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "event_option",
-	joinColumns = @JoinColumn(name="event_id"),
-	inverseJoinColumns = @JoinColumn(name="option_id"))
+	@OneToMany(mappedBy ="event" , cascade = CascadeType.ALL)
 	private List<EventOption> options;
 
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "event_members",
-	joinColumns = @JoinColumn(name="event_id"),
-	inverseJoinColumns = @JoinColumn(name="member_id"))
+	@OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
 	private List<EventMember> members;
 	
 	

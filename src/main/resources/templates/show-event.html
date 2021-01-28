@@ -18,7 +18,7 @@
 			<tr>
 				<th>Member Name</th>
 				<div th:each="eoption : ${options}" >
-					<th> <div th:text="${eoption.startTime}" />  - <div th:text="${eoption.endTime}" /></th>
+					<th> <div th:text="${eoption.showTime()}" /></th>
 				</div>
 				
 			</tr> 
