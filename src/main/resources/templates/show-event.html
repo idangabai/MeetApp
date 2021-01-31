@@ -18,32 +18,43 @@
 			<tr>
 				<th>Member Name</th>
 				<div th:each="eoption : ${options}" >
-					<th> <div th:text="${eoption.showTime()}" /></th>
+					<th> <span th:text="${eoption.showTime()}" /></th>
 				</div>
-				
+				<th>Action</th>
 			</tr> 
 		</thead>
 		<tbody>
+		<form action="#" th:action="@{/events/updateTable}" th:object="${tablePage}" method="post" >
+			<div>
 			<tr th:each="emember : ${members}">
+			
 				<td th:text="${emember.name}" />
 				
 				<div th:each="checkVal : ${emember.getCheckedOptions(options)}">
 				
+
 					<td>
-					
-
-						<div th:if="${checkVal.booleanValue()}">
-						  <p>TRUE</p>
-						</div>
-						<div th:unless="${checkVal.booleanValue()}">
-						  <p>FALSE</p>
-						</div>
-
-					
-					</td>
+					<div th:if="${checkVal.check}">
+					hi
+					<input type="checkbox" th:field="*{checkItems}" th:value="|${emember.id}-${checkVal.optionId}|"  checked >
+					</div>
+					<div th:unless="${checkVal.check}">
+					hello
+					<input type="checkbox" th:field="*{checkItems}" th:value="|${emember.id}-${checkVal.optionId}|" />
+					</div>
+						
+					</td>	
 				
 				</div>
-					
+				</tr>
+				
+				<tr>
+					<td>			 
+						<input type="submit" value="Update" >
+					</td>
+				</tr>
+				</div>
+				</form>	
 		</tbody>
 
 	</table>

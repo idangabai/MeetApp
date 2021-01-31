@@ -14,6 +14,7 @@ import com.idan.mservice.DoodleClone.entity.Event;
 import com.idan.mservice.DoodleClone.entity.EventMember;
 import com.idan.mservice.DoodleClone.entity.EventOption;
 import com.idan.mservice.DoodleClone.service.EventService;
+import com.idan.mservice.DoodleClone.table.TablePage;
 
 @Controller
 @RequestMapping("/events")
@@ -49,10 +50,8 @@ public class EventController {
 		theModel.addAttribute("members", members);
 		
 		//set the checked table
-		for(EventMember option : members) {
-			System.out.println(option);
-		}
-		
+		TablePage tablePage = new TablePage(event, options, members);
+		theModel.addAttribute("tablePage", tablePage);
 		
 		return "show-event";
 	}

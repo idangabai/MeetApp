@@ -77,15 +77,15 @@ public class EventMember {
 		this.chosenOptions = chosenOptions;
 	}
 	
-	public List<Boolean> getCheckedOptions(List<EventOption> allOptions){
+	public List<OptionCheck> getCheckedOptions(List<EventOption> allOptions){
 		
-		List<Boolean> checkedList = new ArrayList<Boolean>();
+		List<OptionCheck> checkedList = new ArrayList<>();
 		
 		for(EventOption currentOption : allOptions) {
 			if(chosenOptions.contains(currentOption)) {
-				checkedList.add(Boolean.TRUE);
+				checkedList.add(new OptionCheck(true, currentOption.getId(), this.id) );
 			}else {
-				checkedList.add(Boolean.FALSE);
+				checkedList.add(new OptionCheck(false, currentOption.getId(), this.id) );
 			}
 		}
 		

@@ -1,4 +1,4 @@
-ver 0.2 
-updated db schema
-also updated the entities
-need to update the page to have checklists
+ver 0.3 
+the page is ready but got the bug of checked-
+items are not checked.
+before updating the page
