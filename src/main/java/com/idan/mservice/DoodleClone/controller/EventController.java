@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.idan.mservice.DoodleClone.entity.Event;
@@ -39,7 +41,7 @@ public class EventController {
 	
 	@GetMapping("/show/{eventId}")
 	public String showEventById(Model theModel, @PathVariable int eventId) {
-		System.out.println("hi the id is: " + eventId);
+		
 		Event event  =  eventService.findEventById(eventId);
 		theModel.addAttribute("event", event);
 		
@@ -54,5 +56,18 @@ public class EventController {
 		theModel.addAttribute("tablePage", tablePage);
 		
 		return "show-event";
+	}
+	
+	
+	@PostMapping("/updateTable")
+	public String updateTable(@ModelAttribute TablePage tablePage, Model theModel) {
+		
+		System.out.println(tablePage);
+		int eventId  =  tablePage.getEventId();
+		List<String> memberOptions =  tablePage.getCheckItems();
+		System.out.println("===>>>> update table!!!");
+		eventService.updateEventMemberOtions(eventId, memberOptions);
+		
+		return "redirect:/events/show/" +  eventId;
 	}
 }

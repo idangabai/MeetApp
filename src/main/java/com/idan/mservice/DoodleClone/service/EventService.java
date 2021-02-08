@@ -15,6 +15,7 @@ public interface EventService {
 	
 	public void saveEventOption(EventOption theEventOption);
 	
+	public void updateEventMemberOtions(int eventId,  List<String> memberOptions);
 	
 	//read
 	public Event findEventById(int theId);

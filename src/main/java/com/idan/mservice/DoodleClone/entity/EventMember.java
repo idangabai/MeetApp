@@ -35,7 +35,7 @@ public class EventMember {
 	
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "member_options",
 	joinColumns = @JoinColumn(name="member_id"),
 	inverseJoinColumns = @JoinColumn(name="option_id"))
@@ -91,6 +91,36 @@ public class EventMember {
 		
 		
 		return checkedList;
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EventMember other = (EventMember) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "EventMember [id=" + id + ", name=" + name + ", chosenOptions=" + chosenOptions + "]";
 	}
 	
 	

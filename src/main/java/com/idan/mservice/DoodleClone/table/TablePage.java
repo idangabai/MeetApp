@@ -11,6 +11,7 @@ public class TablePage {
 
 	private Event event;
 	
+	private int eventId;
 	
 	private List<EventOption> options;
 	
@@ -28,6 +29,7 @@ public class TablePage {
 	
 	public TablePage(Event event, List<EventOption> options, List<EventMember> members) {
 		this.event = event;
+		eventId = event.getId();
 		this.options = options;
 		this.members = members;
 		checkItems = new ArrayList<>();
@@ -87,6 +89,16 @@ public class TablePage {
 
 	public void setRows(List<TableRow> rows) {
 		this.rows = rows;
+	}
+
+
+	public int getEventId() {
+		return eventId;
+	}
+
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 	
 	
