@@ -34,14 +34,14 @@ public class EventMemberDaoImpl implements EventMemberDao {
 
 	}
 
-	@Override
-	public void updateMemberOptions(EventMember theEventMember, List<EventOption> updatedOptions) {
-		Session currentSession = entityManager.unwrap(Session.class);
-		EventMember theMember =  currentSession.get(EventMember.class, theEventMember.getId());
-		theMember.setChosenOptions(updatedOptions);
-		currentSession.saveOrUpdate(theMember);
-		
-		
-	}
+//	@Override
+//	public void updateMemberOptions(EventMember theEventMember, List<EventOption> updatedOptions) {
+//		Session currentSession = entityManager.unwrap(Session.class);
+//		EventMember theMember =  currentSession.get(EventMember.class, theEventMember.getId());
+//		theMember.setChosenOptions(updatedOptions);
+//		currentSession.saveOrUpdate(theMember);
+//		
+//		
+//	}
 
 }

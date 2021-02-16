@@ -11,6 +11,6 @@ public interface EventMemberDao {
 	
 	public void save(EventMember theEventMember);
 	
-	public void updateMemberOptions(EventMember theEventMember, List<EventOption> updatedOptions);
+//	public void updateMemberOptions(EventMember theEventMember, List<EventOption> updatedOptions);
 	
 }

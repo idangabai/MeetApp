@@ -2,8 +2,11 @@ package com.idan.mservice.DoodleClone.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +44,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	@Transactional
 	public void saveEventOption(EventOption theEventOption) {
-		return;
+		eventOptionDao.save(theEventOption);
 		
 	}
 	
@@ -84,6 +87,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
+	@Transactional
 	public void updateEventMemberOtions(int eventId, List<String> memberOptions) {
 		Event event =  eventDao.findEventsById(eventId);
 		if(event == null) {
@@ -94,8 +98,10 @@ public class EventServiceImpl implements EventService {
 		List<EventMember> members = event.getMembers();
 		Map<EventMember, List<EventOption>> seenMembers = new HashMap<>();
 		
+//		Map<EventOption, Set<EventMember>> updatedEventOptionsMembers =  new HashMap<>();
+ 		
 		//1
-		System.out.println(memberOptions);
+//		System.out.println(memberOptions);
 		
 		for(String memberOption : memberOptions) {
 			String[] ids =  memberOption.split("-");
@@ -115,27 +121,30 @@ public class EventServiceImpl implements EventService {
 				
 				List<EventOption> memberOptionsList = seenMembers.get(theMember);
 				memberOptionsList.add(theOption);
+				seenMembers.put(theMember, memberOptionsList);
+				
+
+				
 				
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
 			
 		}
-		
 		for(EventMember member : members) {
 			if(! seenMembers.containsKey(member)) {
-				member.setChosenOptions(new ArrayList<>());
+				member.setChosenOptions(new HashSet<>());
+				
 			}else {
-				member.setChosenOptions(seenMembers.get(member));
+				Set<EventOption> chosenOption =seenMembers.get(member).stream().collect(Collectors.toSet()); 
+				member.setChosenOptions(chosenOption);
 			}
-			eventMemberDao.updateMemberOptions(member, member.getChosenOptions());
-			//2
-			System.out.println(member);
-			System.out.println(member.getChosenOptions());
+			eventMemberDao.save(member);
+			
+			
 		}
 		
-		
-		
+
 		
 	}
 

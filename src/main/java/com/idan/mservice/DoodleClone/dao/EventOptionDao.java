@@ -4,4 +4,6 @@ import com.idan.mservice.DoodleClone.entity.EventOption;
 
 public interface EventOptionDao {
 	public EventOption findEventOptionById(int theId);
+	
+	public void save(EventOption theOption);
 }

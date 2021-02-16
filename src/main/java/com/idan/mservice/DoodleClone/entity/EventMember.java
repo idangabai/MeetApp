@@ -1,19 +1,20 @@
 package com.idan.mservice.DoodleClone.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,15 +36,23 @@ public class EventMember {
 	
 	
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	public EventMember(int id, String name, Event event, Set<EventOption> chosenOptions) {
+		this.id = id;
+		this.name = name;
+		this.event = event;
+		this.chosenOptions = chosenOptions;
+	}
+
+
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "member_options",
-	joinColumns = @JoinColumn(name="member_id"),
-	inverseJoinColumns = @JoinColumn(name="option_id"))
-	List<EventOption> chosenOptions;
+	joinColumns = { @JoinColumn(name="member_id")},
+	inverseJoinColumns = {@JoinColumn(name="option_id")})
+	Set<EventOption> chosenOptions;
 	
 	public void addEventOption(EventOption theEventOption) {
 		if(theEventOption == null) {
-			chosenOptions  = new ArrayList<>();
+			chosenOptions  = new HashSet<>();
 		}
 		chosenOptions.add(theEventOption);
 	}
@@ -69,11 +78,11 @@ public class EventMember {
 		this.name = name;
 	}
 
-	public List<EventOption> getChosenOptions() {
+	public Set<EventOption> getChosenOptions() {
 		return chosenOptions;
 	}
 
-	public void setChosenOptions(List<EventOption> chosenOptions) {
+	public void setChosenOptions(Set<EventOption> chosenOptions) {
 		this.chosenOptions = chosenOptions;
 	}
 	

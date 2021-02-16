@@ -21,4 +21,11 @@ public class EventOptionDaoImpl implements EventOptionDao{
 		return theOption;
 	}
 
+	@Override
+	public void save(EventOption theOption) {
+		Session currentSession = entityManager.unwrap(Session.class);
+		currentSession.saveOrUpdate(theOption);
+		
+	}
+
 }
