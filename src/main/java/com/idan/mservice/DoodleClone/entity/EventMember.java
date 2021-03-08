@@ -81,6 +81,10 @@ public class EventMember {
 	public Set<EventOption> getChosenOptions() {
 		return chosenOptions;
 	}
+	
+	public void initChosenOptions() {
+		this.chosenOptions = new HashSet<>();
+	}
 
 	public void setChosenOptions(Set<EventOption> chosenOptions) {
 		this.chosenOptions = chosenOptions;
@@ -131,6 +135,23 @@ public class EventMember {
 	public String toString() {
 		return "EventMember [id=" + id + ", name=" + name + ", chosenOptions=" + chosenOptions + "]";
 	}
+
+
+	public Event getEvent() {
+		return event;
+	}
+
+
+	public void setEvent(Event event) {
+		this.event = event;
+	}
 	
+	public void clearChosenOptions() {
+		chosenOptions.clear();
+	}
+	
+	public boolean addOption(EventOption theOption) {
+		return chosenOptions.add(theOption);
+	}
 	
 }

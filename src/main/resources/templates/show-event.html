@@ -15,8 +15,10 @@
 	<div class="container">
 		<h3>Event Directory</h3>
 		<hr>
-		<a th:href="@{/events/showFormForAddEvent}"
-			class="btn btn-primary btn-sm mb-3">Add Event</a>
+		<a th:href="@{/events/{eventId}/showFormForAddMember(eventId=${event.id})}"
+			class="btn btn-primary btn-sm mb-3">Add Member</a>
+		<a th:href="@{/events/{eventId}/showFormForAddOption(eventId=${event.id})}"
+			class="btn btn-primary btn-sm mb-3">Add Option</a>
 		<table border="1" class="table table-bordered table-striped">
 
 			<thead class="table-dark">
@@ -58,6 +60,11 @@
 			</tbody>
 
 		</table>
+
+		<div>
+		<a th:href="@{/events/show}">Back to Events List</a>
+		</div>
+
 	</div>
 </body>
 </html>

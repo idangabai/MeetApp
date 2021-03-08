@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.idan.mservice.DoodleClone.entity.Event;
 import com.idan.mservice.DoodleClone.entity.EventMember;
@@ -37,6 +38,32 @@ public class EventController {
 		return "event-list";
 	}
 	
+	@GetMapping("/{eventId}/showFormForAddMember")
+	public String showFormForAddMember(Model theModel, @PathVariable int eventId) {
+		Event event = eventService.findEventById(eventId);
+		
+		EventMember member = new EventMember();
+		member.setEvent(event);
+		theModel.addAttribute("member", member);
+		theModel.addAttribute("eventId", eventId);
+		
+		
+		return "member-form";
+	}
+	
+	
+	@GetMapping("/{eventId}/showFormForAddOption")
+	public String showFormForAddOption(Model theModel, @PathVariable int eventId) {
+		Event event = eventService.findEventById(eventId);
+		
+		EventOption option = new EventOption();
+		
+		theModel.addAttribute("option", option);
+		theModel.addAttribute("eventId", eventId);
+		
+		
+		return "option-form";
+	}
 	
 	
 	@GetMapping("/show/{eventId}")
@@ -65,9 +92,59 @@ public class EventController {
 		System.out.println(tablePage);
 		int eventId  =  tablePage.getEventId();
 		List<String> memberOptions =  tablePage.getCheckItems();
-		System.out.println("===>>>> update table!!!");
 		eventService.updateEventMemberOtions(eventId, memberOptions);
 		
 		return "redirect:/events/show/" +  eventId;
+	}
+	
+	//show event form
+	@GetMapping("/showFormForAddEvent")
+	public String showEventForm(Model theModel) {
+		
+		theModel.addAttribute("event", new Event());
+		return "event-form";
+	}
+	
+	//create new event
+	@PostMapping("/save")
+	public String saveNewEvent(@ModelAttribute("event") Event theEvent) {
+		theEvent.setId(0);
+		eventService.saveEvent(theEvent);
+		return "redirect:/events/show";
+	}
+	
+	
+	@PostMapping("/{eventId}/members/save")
+	public String saveNewEventMember(@ModelAttribute("member") EventMember theMember, @PathVariable int eventId) {
+		theMember.setId(0);
+		theMember.initChosenOptions();;
+		Event event = eventService.findEventById(eventId);
+		theMember.setEvent(event);
+		event.addMember(theMember);
+		eventService.saveMember(theMember);
+		eventService.saveEvent(event);
+		return "redirect:/events/show/" + eventId;
+	}
+	
+	
+	@PostMapping("/{eventId}/options/save")
+	public String saveNewEventOption(@ModelAttribute("option") EventOption theOption, @PathVariable int eventId) {
+		theOption.setId(0);
+		
+		Event event = eventService.findEventById(eventId);
+		theOption.setEvent(event);
+		event.addOption(theOption);
+		eventService.saveEventOption(theOption);
+		eventService.saveEvent(event);
+		return "redirect:/events/show/" + eventId;
+	}
+	
+	//delete an event
+	@GetMapping("/delete")
+	public String deleteEventById(@RequestParam("eventId") int theId) {
+		
+		eventService.deleteEventById(theId);
+		
+		return "redirect:/events/show";	
 	}
 }

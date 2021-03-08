@@ -29,6 +29,10 @@
 					<a th:href="@{/events/show/{eventId}(eventId=${tempEvent.id})}" class="btn btn-info btn-sm">
 						Show Event
 					</a>
+					<a th:href="@{/events/delete(eventId=${tempEvent.id})}" class="btn btn-danger btn-sm"
+					onclick="if (!(confirm('Are you sure you want to delete this event?'))) return false">
+						Delete
+					</a>
 				</td>
 		</tbody>
 

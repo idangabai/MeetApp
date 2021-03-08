@@ -167,5 +167,16 @@ public class EventServiceImpl implements EventService {
 //		return null;
 	}
 
+	@Override
+	@Transactional
+	public void deleteEventById(int theId) {
+		Event event = eventDao.findEventsById(theId);
+		if(event ==null) {
+			return; //maybe throw an error
+		}
+		eventDao.deleteById(theId);
+		
+	}
+
 
 }

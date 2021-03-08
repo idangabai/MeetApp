@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Event Form</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+	<h3>Save Event</h3>
+	<hr>
+	<form action="#" th:action="@{/events/save}" th:object="${event}" method="POST" >
+	
+		<input type="text" th:field="*{title}" class="form-control mb-4 col-4" placeholder="Event Name" >
+		
+		 
+				
+		<button type="submit" class="btn btn-info col-2">Create</button>
+	</form>
+	<hr>
+	<a th:href="@{/events/show}">Back to Events List</a>
+</div>
+</body>
+</html>

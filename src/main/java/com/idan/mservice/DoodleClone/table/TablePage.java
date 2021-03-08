@@ -6,6 +6,7 @@ import java.util.List;
 import com.idan.mservice.DoodleClone.entity.Event;
 import com.idan.mservice.DoodleClone.entity.EventMember;
 import com.idan.mservice.DoodleClone.entity.EventOption;
+import com.idan.mservice.DoodleClone.entity.OptionCheck;
 
 public class TablePage {
 
@@ -34,9 +35,14 @@ public class TablePage {
 		this.members = members;
 		checkItems = new ArrayList<>();
 		rows = new ArrayList<>();
+		
 		for(EventMember member : members) {
 			TableRow row = new TableRow(member.getName(), member.getCheckedOptions(options));
-			
+			//make a summery of how many each option was voted
+//			List<OptionCheck> checkedOptions =  row.getCheckedOptions();
+//			for(int i = 0; i<checkedOptions.size(); i++ ) {
+//				
+//			}
 			rows.add(row);
 		}
 	}

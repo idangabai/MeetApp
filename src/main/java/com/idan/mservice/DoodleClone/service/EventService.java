@@ -27,4 +27,7 @@ public interface EventService {
 	
 	//show all events
 	public List<Event> findAllEvents();
+
+	//delete
+	public void deleteEventById(int theId);
 }
