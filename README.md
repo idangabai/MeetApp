@@ -1,5 +1,5 @@
 # MeetApp
-##schedualing web app
+## schedualing web app
 
 ![](screenshot/meetAppScreenShot1.png)
 
